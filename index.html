@@ -15,11 +15,11 @@ body {
   overflow: hidden;
 }
 
-/* PARTICULAS */
+/* CIELO */
 canvas {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
 }
 
 /* INTRO */
@@ -62,17 +62,17 @@ canvas {
 /* MAIN */
 .main {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f6d6df, #f6efe9);
+  background: linear-gradient(180deg, rgba(0,0,0,.85), #f6efe9);
   color: #5a3a44;
   text-align: center;
   padding: 120px 20px;
   opacity: 0;
   transition: opacity 2s ease;
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 
-/* TEXTO BIENVENIDA */
+/* BIENVENIDA */
 .welcome span {
   display: block;
   opacity: 0;
@@ -80,6 +80,7 @@ canvas {
   font-size: 1.4rem;
   line-height: 2;
   animation: fadeLine 1.5s forwards;
+  color: #fff;
 }
 
 .welcome span:nth-child(1){animation-delay:.5s}
@@ -94,7 +95,7 @@ canvas {
 /* CARTA */
 .letter {
   max-width: 700px;
-  margin: 120px auto;
+  margin: 140px auto;
   padding: 80px;
   background: white;
   border-radius: 26px;
@@ -160,22 +161,12 @@ button {
   from { opacity:0; transform:translateY(80px); }
   to { opacity:1; transform:translateY(0); }
 }
-
-/* FINAL */
-.final {
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  font-family:'Playfair Display', serif;
-}
 </style>
 </head>
 
 <body>
 
-<canvas id="particles"></canvas>
+<canvas id="stars"></canvas>
 
 <section class="intro" id="intro">
   <div class="intro-text">Página web dedicada al amor de mi vida</div>
@@ -190,7 +181,7 @@ button {
     <span>Ojalá lo sientas.</span>
   </div>
 
-  <div class="letter" id="letter" ondblclick="secret()">
+  <div class="letter" id="letter">
     <h3>For you</h3>
     <p>
       Desde que llegaste a mi vida,<br>
@@ -232,42 +223,54 @@ function moveNo(){
 
 function sayYes(){
   document.getElementById("main").innerHTML=`
-    <div class="final">
+    <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Playfair Display',serif;color:white">
       <h2>Thank you for making my world softer.</h2>
-      <p style="margin-top:20px; opacity:.7">
+      <p style="margin-top:20px;opacity:.7">
         Happy Valentine’s Day, Erandi.
       </p>
     </div>`;
 }
 
-/* EASTER EGG */
-function secret(){
-  alert("You are my favorite place.");
+/* ESTRELLAS */
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+}
+resize();
+addEventListener("resize", resize);
+
+const stars = [];
+const STAR_COUNT = 250;
+
+for(let i=0;i<STAR_COUNT;i++){
+  stars.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    r: Math.random()*1.5 + .5,
+    a: Math.random(),
+    s: Math.random()*.3 + .05
+  });
 }
 
-/* PARTICULAS */
-const c=document.getElementById("particles");
-const ctx=c.getContext("2d");
-c.width=innerWidth; c.height=innerHeight;
-const p=[...Array(80)].map(()=>({
-  x:Math.random()*c.width,
-  y:Math.random()*c.height,
-  r:Math.random()*2+1,
-  s:Math.random()*.4+.2
-}));
-function draw(){
-  ctx.clearRect(0,0,c.width,c.height);
-  ctx.fillStyle="rgba(255,200,220,.6)";
-  p.forEach(o=>{
-    o.y-=o.s;
-    if(o.y<0)o.y=c.height;
+function animateStars(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  stars.forEach(star=>{
+    star.a += (Math.random()-.5)*.05;
+    star.a = Math.max(.2, Math.min(1, star.a));
+    star.y += star.s;
+    if(star.y > canvas.height) star.y = 0;
+
     ctx.beginPath();
-    ctx.arc(o.x,o.y,o.r,0,Math.PI*2);
+    ctx.arc(star.x, star.y, star.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,255,${star.a})`;
     ctx.fill();
   });
-  requestAnimationFrame(draw);
+  requestAnimationFrame(animateStars);
 }
-draw();
+animateStars();
 </script>
 
 </body>
