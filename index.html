@@ -2,39 +2,91 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>For You</title>
+  <title>San Valentín</title>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      min-height: 100vh;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #f7d9e3, #f6efe9);
+      background: #f6efe9;
       color: #5a3a44;
+    }
+
+    /* ---------- INTRO ---------- */
+
+    .intro {
+      height: 100vh;
+      background: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+    }
+
+    .stars::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      box-shadow:
+        100px 200px white,
+        300px 400px white,
+        500px 150px white,
+        700px 300px white,
+        900px 100px white,
+        1100px 500px white,
+        1300px 250px white,
+        200px 600px white,
+        400px 50px white,
+        800px 550px white;
+      animation: starsMove 25s linear infinite;
+    }
+
+    @keyframes starsMove {
+      from { transform: translateY(0); }
+      to { transform: translateY(-300px); }
+    }
+
+    .intro-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      opacity: 0.85;
+      z-index: 2;
       text-align: center;
-      overflow-x: hidden;
+      padding: 20px;
+    }
+
+    /* ---------- MAIN PAGE ---------- */
+
+    .main {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #f7d9e3, #f6efe9);
+      text-align: center;
+      padding-bottom: 120px;
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3.8rem;
-      margin-top: 120px;
-      margin-bottom: 20px;
-      opacity: 0;
+      font-size: 3.2rem;
+      margin-top: 140px;
+      margin-bottom: 40px;
       animation: fadeUp 2s ease forwards;
-    }
-
-    .hint {
-      font-size: 1rem;
-      opacity: 0.7;
-      animation: fadeIn 3s ease forwards;
     }
 
     .envelope {
@@ -42,15 +94,15 @@
       height: 170px;
       margin: 120px auto;
       background: #e6b7c6;
-      border-radius: 12px;
+      border-radius: 14px;
       position: relative;
       cursor: pointer;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.18);
       transition: transform 0.4s ease;
     }
 
     .envelope:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
     }
 
     .envelope::before {
@@ -58,49 +110,46 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 0;
-      height: 0;
       border-left: 130px solid transparent;
       border-right: 130px solid transparent;
       border-top: 90px solid #d99bad;
-      border-radius: 0 0 12px 12px;
     }
 
     .letter {
       display: none;
       max-width: 720px;
-      background: #ffffff;
-      margin: 0 auto 80px;
-      padding: 50px;
-      border-radius: 20px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.15);
-      animation: fadeUp 1.5s ease forwards;
+      background: white;
+      margin: 0 auto;
+      padding: 60px;
+      border-radius: 24px;
+      box-shadow: 0 35px 70px rgba(0,0,0,0.18);
+      animation: fadeUp 1.8s ease forwards;
     }
 
     .letter p {
       font-size: 1.1rem;
-      line-height: 1.8;
+      line-height: 1.9;
     }
 
     .question {
-      margin-top: 40px;
+      margin-top: 50px;
       font-family: 'Playfair Display', serif;
       font-size: 1.8rem;
     }
 
     .buttons {
-      margin-top: 30px;
+      margin-top: 40px;
       position: relative;
       height: 80px;
     }
 
     button {
-      font-family: 'Poppins', sans-serif;
-      padding: 14px 36px;
+      padding: 14px 38px;
       font-size: 1rem;
-      border-radius: 30px;
+      border-radius: 40px;
       border: none;
       cursor: pointer;
+      font-family: 'Poppins', sans-serif;
       transition: all 0.3s ease;
     }
 
@@ -114,83 +163,82 @@
     }
 
     #no {
-      background: #e0e0e0;
+      background: #e4e4e4;
       color: #555;
       position: absolute;
     }
 
     .final {
       display: none;
-      min-height: 100vh;
-      background: linear-gradient(180deg, #f7d9e3, #f6efe9);
       position: fixed;
       inset: 0;
+      background: linear-gradient(180deg, #f7d9e3, #f6efe9);
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      animation: fadeIn 1.5s ease forwards;
+      animation: fadeIn 2s ease forwards;
+      text-align: center;
     }
 
     .final h2 {
       font-family: 'Playfair Display', serif;
       font-size: 3rem;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
-    .hearts {
-      font-size: 2rem;
-      animation: float 3s ease-in-out infinite;
+    .final p {
+      opacity: 0.7;
+      font-size: 1.1rem;
     }
 
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
   </style>
 </head>
+
 <body>
 
-  <h1>t amo eram di</h1>
-  <div class="hint">desliza</div>
-
-  <div class="envelope" onclick="openLetter()"></div>
-
-  <div class="letter" id="letter">
-    <p>
-      Desde que llegaste a mi vida,<br>
-      los días normales se sienten especiales.<br>
-      No necesito una fecha para quererte,<br>
-      pero sí quiero pasar este San Valentín contigo.
-    </p>
-
-    <div class="question">Will you be my Valentine?</div>
-
-    <div class="buttons">
-      <button id="yes" onclick="sayYes()">Yes</button>
-      <button id="no" onmouseover="moveNo()">No</button>
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="stars"></div>
+    <div class="intro-text">
+      Página web dedicada al amor de mi vida
     </div>
-  </div>
+  </section>
+
+  <!-- MAIN -->
+  <section class="main">
+    <h1>San Valentín</h1>
+
+    <div class="envelope" onclick="openLetter()"></div>
+
+    <div class="letter" id="letter">
+      <p>
+        Desde que llegaste a mi vida,<br>
+        los días normales se sienten especiales.<br>
+        No necesito una fecha para quererte,<br>
+        pero sí quiero pasar este San Valentín contigo.
+      </p>
+
+      <div class="question">Will you be my Valentine?</div>
+
+      <div class="buttons">
+        <button id="yes" onclick="sayYes()">Yes</button>
+        <button id="no" onmouseover="moveNo()">No</button>
+      </div>
+    </div>
+  </section>
 
   <div class="final" id="final">
     <h2>Elegirte siempre será mi mejor decisión.</h2>
     <p>Feliz San Valentín.</p>
-    <div class="hearts">💗 💗 💗</div>
   </div>
 
   <script>
@@ -206,8 +254,8 @@
 
     function moveNo() {
       const btn = document.getElementById("no");
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 80);
+      const x = Math.random() * (window.innerWidth - 140);
+      const y = Math.random() * (window.innerHeight - 100);
       btn.style.left = x + "px";
       btn.style.top = y + "px";
     }
