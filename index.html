@@ -11,6 +11,7 @@
 
     body {
       font-family: 'Poppins', sans-serif;
+      background: black;
       overflow: hidden;
     }
 
@@ -26,41 +27,14 @@
       justify-content: center;
       z-index: 10;
       transition: transform 2s ease;
-      overflow: hidden;
-    }
-
-    .stars::after {
-      content: "";
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      box-shadow:
-        100px 200px white,
-        300px 400px white,
-        500px 150px white,
-        700px 300px white,
-        900px 100px white,
-        1100px 500px white,
-        1300px 250px white,
-        200px 600px white,
-        400px 80px white,
-        800px 550px white;
-      animation: starsMove 30s linear infinite;
-    }
-
-    @keyframes starsMove {
-      from { transform: translateY(0); }
-      to { transform: translateY(-300px); }
     }
 
     .intro-text {
       font-family: 'Playfair Display', serif;
       font-size: 1.6rem;
       letter-spacing: 2px;
-      opacity: 0.85;
+      opacity: .85;
       margin-bottom: 40px;
-      z-index: 2;
       text-align: center;
     }
 
@@ -72,8 +46,6 @@
       color: white;
       font-size: 1rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 2;
     }
 
     .start-btn:hover {
@@ -103,30 +75,31 @@
       padding: 0 20px;
     }
 
+    /* ---------- CARTA REAL ---------- */
     .letter {
-      max-width: 720px;
+      max-width: 700px;
       margin: 0 auto 120px;
       padding: 70px;
       background: white;
       border-radius: 24px;
-      box-shadow: 0 35px 70px rgba(0,0,0,0.18);
+      box-shadow: 0 40px 80px rgba(0,0,0,.25);
       display: none;
-      animation: fadeUp 2s ease forwards;
+      animation: cartaEntrada 2s ease forwards;
     }
 
     .letter p {
       font-size: 1.1rem;
       line-height: 1.9;
+      margin-bottom: 40px;
     }
 
     .question {
-      margin-top: 50px;
       font-family: 'Playfair Display', serif;
       font-size: 1.8rem;
+      margin-bottom: 40px;
     }
 
     .buttons {
-      margin-top: 40px;
       position: relative;
       height: 80px;
     }
@@ -138,16 +111,11 @@
       border: none;
       cursor: pointer;
       font-family: 'Poppins', sans-serif;
-      transition: all 0.3s ease;
     }
 
     #yes {
       background: #d65c8b;
       color: white;
-    }
-
-    #yes:hover {
-      transform: scale(1.05);
     }
 
     #no {
@@ -156,9 +124,15 @@
       position: absolute;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(60px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes cartaEntrada {
+      from {
+        opacity: 0;
+        transform: translateY(80px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -167,7 +141,6 @@
 
   <!-- INTRO -->
   <section class="intro" id="intro">
-    <div class="stars"></div>
     <div class="intro-text">
       Página web dedicada al amor de mi vida
     </div>
@@ -212,7 +185,7 @@
 
       setTimeout(() => {
         document.getElementById("letter").style.display = "block";
-      }, 3500);
+      }, 3200);
     }
 
     function sayYes() {
@@ -235,10 +208,8 @@
 
     function moveNo() {
       const btn = document.getElementById("no");
-      const x = Math.random() * (window.innerWidth - 140);
-      const y = Math.random() * (window.innerHeight - 100);
-      btn.style.left = x + "px";
-      btn.style.top = y + "px";
+      btn.style.left = Math.random() * 400 + "px";
+      btn.style.top = Math.random() * 60 + "px";
     }
   </script>
 
