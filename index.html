@@ -15,14 +15,14 @@ body {
   overflow: hidden;
 }
 
-/* CIELO */
+/* ===== CIELO ===== */
 canvas {
   position: fixed;
   inset: 0;
   z-index: 1;
 }
 
-/* INTRO */
+/* ===== INTRO ===== */
 .intro {
   position: fixed;
   inset: 0;
@@ -59,63 +59,65 @@ canvas {
   color: black;
 }
 
-/* MAIN */
+/* ===== MAIN ===== */
 .main {
   min-height: 100vh;
-  background: linear-gradient(180deg, rgba(0,0,0,.85), #f6efe9);
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,.25), transparent 60%),
+    linear-gradient(180deg, #f3cfd8, #f6efe9);
   color: #5a3a44;
   text-align: center;
-  padding: 120px 20px;
+  padding: 140px 20px;
   opacity: 0;
   transition: opacity 2s ease;
   position: relative;
   z-index: 3;
 }
 
-/* BIENVENIDA */
+/* ===== BIENVENIDA ===== */
 .welcome span {
   display: block;
   opacity: 0;
   font-family: 'Playfair Display', serif;
   font-size: 1.4rem;
   line-height: 2;
-  animation: fadeLine 1.5s forwards;
-  color: #fff;
+  animation: fadeLine 1.6s forwards;
+  color: white;
 }
 
-.welcome span:nth-child(1){animation-delay:.5s}
-.welcome span:nth-child(2){animation-delay:1.8s}
-.welcome span:nth-child(3){animation-delay:3.1s}
-.welcome span:nth-child(4){animation-delay:4.4s}
+.welcome span:nth-child(1){animation-delay:.6s}
+.welcome span:nth-child(2){animation-delay:2s}
+.welcome span:nth-child(3){animation-delay:3.4s}
+.welcome span:nth-child(4){animation-delay:4.8s}
 
 @keyframes fadeLine {
   to { opacity: 1; }
 }
 
-/* CARTA */
+/* ===== CARTA ===== */
 .letter {
   max-width: 700px;
-  margin: 140px auto;
+  margin: 160px auto;
   padding: 80px;
   background: white;
   border-radius: 26px;
-  box-shadow: 0 40px 80px rgba(0,0,0,.25);
+  box-shadow: 0 60px 120px rgba(0,0,0,.35);
   display: none;
   animation: cartaEntrada 2s ease forwards;
-  transition: transform .4s ease;
+  transition: transform .4s ease, box-shadow 1.5s ease;
   position: relative;
 }
 
 .letter::before {
   content: "";
   position: absolute;
-  inset: 20px;
+  inset: 22px;
   border: 1px solid #e6cfd7;
   border-radius: 18px;
 }
 
 .letter:hover {
-  transform: rotateX(3deg) rotateY(-3deg);
+  transform: translateY(-4px) rotateX(2deg);
 }
 
 .letter h3 {
@@ -158,7 +160,7 @@ button {
 }
 
 @keyframes cartaEntrada {
-  from { opacity:0; transform:translateY(80px); }
+  from { opacity:0; transform:translateY(90px); }
   to { opacity:1; transform:translateY(0); }
 }
 </style>
@@ -176,9 +178,9 @@ button {
 <section class="main" id="main">
   <div class="welcome">
     <span>Bienvenida.</span>
-    <span>Este espacio fue creado con calma,</span>
-    <span>pensando solo en una persona.</span>
-    <span>Ojalá lo sientas.</span>
+    <span>Esto no es solo una página.</span>
+    <span>Es un pequeño intento de mostrarte</span>
+    <span>lo mucho que significas para mí.</span>
   </div>
 
   <div class="letter" id="letter">
@@ -202,22 +204,28 @@ button {
 </section>
 
 <script>
-/* EXPERIENCIA */
+/* ===== EXPERIENCIA ===== */
 function startExperience(){
   document.getElementById("intro").style.transform="translateY(-100%)";
   setTimeout(()=>{
     document.body.style.overflow="auto";
     document.getElementById("main").style.opacity=1;
   },1200);
+
+  // micro-pausa emocional
   setTimeout(()=>{
     document.getElementById("letter").style.display="block";
-  },5200);
+    setTimeout(()=>{
+      document.getElementById("letter").style.boxShadow =
+        "0 30px 70px rgba(0,0,0,.25)";
+    },1200);
+  },6500);
 }
 
-/* BOTONES */
+/* ===== BOTONES ===== */
 function moveNo(){
   const b=document.getElementById("no");
-  b.style.left=Math.random()*300+"px";
+  b.style.left=Math.random()*280+"px";
   b.style.top=Math.random()*40+"px";
 }
 
@@ -225,47 +233,51 @@ function sayYes(){
   document.getElementById("main").innerHTML=`
     <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Playfair Display',serif;color:white">
       <h2>Thank you for making my world softer.</h2>
-      <p style="margin-top:20px;opacity:.7">
-        Happy Valentine’s Day, Erandi.
-      </p>
+      <p style="margin-top:20px;opacity:.7">I choose you.</p>
     </div>`;
 }
 
-/* ESTRELLAS */
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
+/* ===== ESTRELLAS CON PROFUNDIDAD ===== */
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
 
 function resize(){
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
 }
 resize();
-addEventListener("resize", resize);
+addEventListener("resize",resize);
 
-const stars = [];
-const STAR_COUNT = 250;
+const layers=[
+  { count:120, speed:.05 },
+  { count:80, speed:.15 },
+  { count:40, speed:.3 }
+];
 
-for(let i=0;i<STAR_COUNT;i++){
-  stars.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    r: Math.random()*1.5 + .5,
-    a: Math.random(),
-    s: Math.random()*.3 + .05
-  });
-}
+const stars=[];
+layers.forEach(layer=>{
+  for(let i=0;i<layer.count;i++){
+    stars.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:Math.random()*1.5+0.5,
+      a:Math.random(),
+      s:layer.speed
+    });
+  }
+});
 
 function animateStars(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   stars.forEach(star=>{
-    star.a += (Math.random()-.5)*.05;
+    star.a += (Math.random()-.5)*.03;
     star.a = Math.max(.2, Math.min(1, star.a));
     star.y += star.s;
-    if(star.y > canvas.height) star.y = 0;
+    if(star.y>canvas.height) star.y=0;
 
     ctx.beginPath();
-    ctx.arc(star.x, star.y, star.r, 0, Math.PI*2);
-    ctx.fillStyle = `rgba(255,255,255,${star.a})`;
+    ctx.arc(star.x,star.y,star.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${star.a})`;
     ctx.fill();
   });
   requestAnimationFrame(animateStars);
