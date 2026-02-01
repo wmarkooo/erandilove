@@ -1,217 +1,274 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>San Valentín</title>
+<meta charset="UTF-8">
+<title>For You</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: black;
-      overflow: hidden;
-    }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: black;
+  overflow: hidden;
+}
 
-    /* ---------- INTRO ---------- */
-    .intro {
-      position: fixed;
-      inset: 0;
-      background: black;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      transition: transform 2s ease;
-    }
+/* PARTICULAS */
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
 
-    .intro-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-      opacity: .85;
-      margin-bottom: 40px;
-      text-align: center;
-    }
+/* INTRO */
+.intro {
+  position: fixed;
+  inset: 0;
+  background: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transition: transform 2s ease;
+}
 
-    .start-btn {
-      padding: 14px 46px;
-      border-radius: 40px;
-      border: 1px solid white;
-      background: transparent;
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-    }
+.intro-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  opacity: .85;
+  margin-bottom: 40px;
+  text-align: center;
+}
 
-    .start-btn:hover {
-      background: white;
-      color: black;
-    }
+.start-btn {
+  padding: 14px 46px;
+  border-radius: 40px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
 
-    /* ---------- MAIN ---------- */
-    .main {
-      min-height: 100vh;
-      background: linear-gradient(180deg, #f7d9e3, #f6efe9);
-      color: #5a3a44;
-      text-align: center;
-      padding-top: 120px;
-      opacity: 0;
-      transition: opacity 2s ease;
-    }
+.start-btn:hover {
+  background: white;
+  color: black;
+}
 
-    .welcome {
-      max-width: 700px;
-      margin: 0 auto 120px;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      line-height: 1.9;
-      opacity: 0;
-      transition: opacity 2s ease;
-      padding: 0 20px;
-    }
+/* MAIN */
+.main {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f6d6df, #f6efe9);
+  color: #5a3a44;
+  text-align: center;
+  padding: 120px 20px;
+  opacity: 0;
+  transition: opacity 2s ease;
+  position: relative;
+  z-index: 1;
+}
 
-    /* ---------- CARTA REAL ---------- */
-    .letter {
-      max-width: 700px;
-      margin: 0 auto 120px;
-      padding: 70px;
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 40px 80px rgba(0,0,0,.25);
-      display: none;
-      animation: cartaEntrada 2s ease forwards;
-    }
+/* TEXTO BIENVENIDA */
+.welcome span {
+  display: block;
+  opacity: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  line-height: 2;
+  animation: fadeLine 1.5s forwards;
+}
 
-    .letter p {
-      font-size: 1.1rem;
-      line-height: 1.9;
-      margin-bottom: 40px;
-    }
+.welcome span:nth-child(1){animation-delay:.5s}
+.welcome span:nth-child(2){animation-delay:1.8s}
+.welcome span:nth-child(3){animation-delay:3.1s}
+.welcome span:nth-child(4){animation-delay:4.4s}
 
-    .question {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      margin-bottom: 40px;
-    }
+@keyframes fadeLine {
+  to { opacity: 1; }
+}
 
-    .buttons {
-      position: relative;
-      height: 80px;
-    }
+/* CARTA */
+.letter {
+  max-width: 700px;
+  margin: 120px auto;
+  padding: 80px;
+  background: white;
+  border-radius: 26px;
+  box-shadow: 0 40px 80px rgba(0,0,0,.25);
+  display: none;
+  animation: cartaEntrada 2s ease forwards;
+  transition: transform .4s ease;
+  position: relative;
+}
 
-    button {
-      padding: 14px 38px;
-      font-size: 1rem;
-      border-radius: 40px;
-      border: none;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-    }
+.letter::before {
+  content: "";
+  position: absolute;
+  inset: 20px;
+  border: 1px solid #e6cfd7;
+  border-radius: 18px;
+}
 
-    #yes {
-      background: #d65c8b;
-      color: white;
-    }
+.letter:hover {
+  transform: rotateX(3deg) rotateY(-3deg);
+}
 
-    #no {
-      background: #e4e4e4;
-      color: #555;
-      position: absolute;
-    }
+.letter h3 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 30px;
+}
 
-    @keyframes cartaEntrada {
-      from {
-        opacity: 0;
-        transform: translateY(80px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+.letter p {
+  line-height: 1.9;
+  margin-bottom: 40px;
+}
+
+.question {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 40px;
+}
+
+.buttons {
+  position: relative;
+  height: 80px;
+}
+
+button {
+  padding: 14px 38px;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+}
+
+#yes {
+  background: #d65c8b;
+  color: white;
+}
+
+#no {
+  background: #e4e4e4;
+  color: #555;
+  position: absolute;
+}
+
+@keyframes cartaEntrada {
+  from { opacity:0; transform:translateY(80px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* FINAL */
+.final {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-family:'Playfair Display', serif;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- INTRO -->
-  <section class="intro" id="intro">
-    <div class="intro-text">
-      Página web dedicada al amor de mi vida
-    </div>
-    <button class="start-btn" onclick="startExperience()">Iniciar</button>
-  </section>
+<canvas id="particles"></canvas>
 
-  <!-- MAIN -->
-  <section class="main" id="main">
-    <div class="welcome" id="welcome">
-      Bienvenida.<br><br>
-      Este pequeño espacio existe por una sola razón:<br>
-      recordarte lo importante que eres para mí.<br><br>
-      Tómate un momento, respira…<br>
-      esto fue hecho con todo mi cariño.
+<section class="intro" id="intro">
+  <div class="intro-text">Página web dedicada al amor de mi vida</div>
+  <button class="start-btn" onclick="startExperience()">Iniciar</button>
+</section>
+
+<section class="main" id="main">
+  <div class="welcome">
+    <span>Bienvenida.</span>
+    <span>Este espacio fue creado con calma,</span>
+    <span>pensando solo en una persona.</span>
+    <span>Ojalá lo sientas.</span>
+  </div>
+
+  <div class="letter" id="letter" ondblclick="secret()">
+    <h3>For you</h3>
+    <p>
+      Desde que llegaste a mi vida,<br>
+      los días normales se sienten especiales.<br>
+      No necesito una fecha para quererte,<br>
+      pero sí quiero pasar este San Valentín contigo.
+    </p>
+
+    <div class="question">Will you be my Valentine?</div>
+
+    <div class="buttons">
+      <button id="yes" onclick="sayYes()">Yes</button>
+      <button id="no" onmouseover="moveNo()">No</button>
     </div>
 
-    <div class="letter" id="letter">
-      <p>
-        Desde que llegaste a mi vida,<br>
-        los días normales se sienten especiales.<br>
-        No necesito una fecha para quererte,<br>
-        pero sí quiero pasar este San Valentín contigo.
+    <p style="margin-top:50px; opacity:.6">— With all my love</p>
+  </div>
+</section>
+
+<script>
+/* EXPERIENCIA */
+function startExperience(){
+  document.getElementById("intro").style.transform="translateY(-100%)";
+  setTimeout(()=>{
+    document.body.style.overflow="auto";
+    document.getElementById("main").style.opacity=1;
+  },1200);
+  setTimeout(()=>{
+    document.getElementById("letter").style.display="block";
+  },5200);
+}
+
+/* BOTONES */
+function moveNo(){
+  const b=document.getElementById("no");
+  b.style.left=Math.random()*300+"px";
+  b.style.top=Math.random()*40+"px";
+}
+
+function sayYes(){
+  document.getElementById("main").innerHTML=`
+    <div class="final">
+      <h2>Thank you for making my world softer.</h2>
+      <p style="margin-top:20px; opacity:.7">
+        Happy Valentine’s Day, Erandi.
       </p>
+    </div>`;
+}
 
-      <div class="question">Will you be my Valentine?</div>
+/* EASTER EGG */
+function secret(){
+  alert("You are my favorite place.");
+}
 
-      <div class="buttons">
-        <button id="yes" onclick="sayYes()">Yes</button>
-        <button id="no" onmouseover="moveNo()">No</button>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    function startExperience() {
-      document.getElementById("intro").style.transform = "translateY(-100%)";
-
-      setTimeout(() => {
-        document.getElementById("main").style.opacity = "1";
-        document.getElementById("welcome").style.opacity = "1";
-      }, 1200);
-
-      setTimeout(() => {
-        document.getElementById("letter").style.display = "block";
-      }, 3200);
-    }
-
-    function sayYes() {
-      document.getElementById("main").innerHTML = `
-        <div style="
-          min-height:100vh;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          flex-direction:column;
-          font-family:'Playfair Display', serif;
-          text-align:center;">
-          <h2 style="font-size:3rem; margin-bottom:20px;">
-            Elegirte siempre será mi mejor decisión.
-          </h2>
-          <p style="opacity:.7;">Feliz San Valentín.</p>
-        </div>
-      `;
-    }
-
-    function moveNo() {
-      const btn = document.getElementById("no");
-      btn.style.left = Math.random() * 400 + "px";
-      btn.style.top = Math.random() * 60 + "px";
-    }
-  </script>
+/* PARTICULAS */
+const c=document.getElementById("particles");
+const ctx=c.getContext("2d");
+c.width=innerWidth; c.height=innerHeight;
+const p=[...Array(80)].map(()=>({
+  x:Math.random()*c.width,
+  y:Math.random()*c.height,
+  r:Math.random()*2+1,
+  s:Math.random()*.4+.2
+}));
+function draw(){
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.fillStyle="rgba(255,200,220,.6)";
+  p.forEach(o=>{
+    o.y-=o.s;
+    if(o.y<0)o.y=c.height;
+    ctx.beginPath();
+    ctx.arc(o.x,o.y,o.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
 
 </body>
 </html>
