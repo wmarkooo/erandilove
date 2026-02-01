@@ -2,38 +2,55 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>For You 💗</title>
+  <title>For You</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(180deg, #ffd1dc, #ffe6f0);
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #f7d9e3, #f6efe9);
+      color: #5a3a44;
       text-align: center;
       overflow-x: hidden;
     }
 
     h1 {
-      margin-top: 100px;
-      font-size: 3.5em;
-      color: #b3005e;
-      animation: fadeIn 2s ease;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
+      margin-top: 120px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 2s ease forwards;
     }
 
-    .scroll {
-      margin-top: 60px;
-      font-size: 1.2em;
-      color: #8a0046;
-      animation: bounce 2s infinite;
+    .hint {
+      font-size: 1rem;
+      opacity: 0.7;
+      animation: fadeIn 3s ease forwards;
     }
 
     .envelope {
-      width: 220px;
-      height: 140px;
-      margin: 100px auto;
-      background: #ff9acb;
+      width: 260px;
+      height: 170px;
+      margin: 120px auto;
+      background: #e6b7c6;
+      border-radius: 12px;
       position: relative;
       cursor: pointer;
-      border-radius: 6px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+      transition: transform 0.4s ease;
+    }
+
+    .envelope:hover {
+      transform: translateY(-5px);
     }
 
     .envelope::before {
@@ -43,58 +60,97 @@
       left: 0;
       width: 0;
       height: 0;
-      border-left: 110px solid transparent;
-      border-right: 110px solid transparent;
-      border-top: 70px solid #ff6fb1;
+      border-left: 130px solid transparent;
+      border-right: 130px solid transparent;
+      border-top: 90px solid #d99bad;
+      border-radius: 0 0 12px 12px;
     }
 
     .letter {
       display: none;
-      background: white;
-      width: 80%;
-      margin: 40px auto;
-      padding: 25px;
-      border-radius: 12px;
-      color: #444;
-      font-size: 1.1em;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-      animation: fadeIn 1.5s ease;
+      max-width: 720px;
+      background: #ffffff;
+      margin: 0 auto 80px;
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+      animation: fadeUp 1.5s ease forwards;
+    }
+
+    .letter p {
+      font-size: 1.1rem;
+      line-height: 1.8;
     }
 
     .question {
-      margin-top: 30px;
-      font-size: 1.5em;
-      color: #b3005e;
+      margin-top: 40px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
     }
 
     .buttons {
-      margin-top: 20px;
+      margin-top: 30px;
+      position: relative;
+      height: 80px;
     }
 
     button {
-      padding: 12px 25px;
-      font-size: 1em;
+      font-family: 'Poppins', sans-serif;
+      padding: 14px 36px;
+      font-size: 1rem;
+      border-radius: 30px;
       border: none;
-      border-radius: 20px;
       cursor: pointer;
-      margin: 10px;
+      transition: all 0.3s ease;
     }
 
     #yes {
-      background: #ff4d94;
+      background: #d65c8b;
       color: white;
     }
 
+    #yes:hover {
+      transform: scale(1.05);
+    }
+
     #no {
-      background: #ccc;
+      background: #e0e0e0;
+      color: #555;
       position: absolute;
     }
 
-    .fireworks {
+    .final {
       display: none;
-      font-size: 2em;
-      margin-top: 40px;
-      animation: fadeIn 2s ease;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #f7d9e3, #f6efe9);
+      position: fixed;
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .final h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hearts {
+      font-size: 2rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes fadeIn {
@@ -102,17 +158,16 @@
       to { opacity: 1; }
     }
 
-    @keyframes bounce {
+    @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-12px); }
     }
   </style>
 </head>
 <body>
 
-  <h1>t amo eram di 💗</h1>
-
-  <div class="scroll">⬇️ desliza ⬇️</div>
+  <h1>t amo eram di</h1>
+  <div class="hint">desliza</div>
 
   <div class="envelope" onclick="openLetter()"></div>
 
@@ -124,36 +179,37 @@
       pero sí quiero pasar este San Valentín contigo.
     </p>
 
-    <div class="question">Will you be my Valentine? 💘</div>
+    <div class="question">Will you be my Valentine?</div>
 
     <div class="buttons">
-      <button id="yes" onclick="sayYes()">Yes 💖</button>
-      <button id="no" onmouseover="moveNo()">No 🙄</button>
+      <button id="yes" onclick="sayYes()">Yes</button>
+      <button id="no" onmouseover="moveNo()">No</button>
     </div>
   </div>
 
-  <div class="fireworks" id="fireworks">
-    🎆💖🎆<br>
-    Sabía que dirías que sí 💕
+  <div class="final" id="final">
+    <h2>Elegirte siempre será mi mejor decisión.</h2>
+    <p>Feliz San Valentín.</p>
+    <div class="hearts">💗 💗 💗</div>
   </div>
 
   <script>
     function openLetter() {
-      document.getElementById("letter").style.display = "block";
-      document.getElementById("letter").scrollIntoView({ behavior: "smooth" });
+      const letter = document.getElementById("letter");
+      letter.style.display = "block";
+      letter.scrollIntoView({ behavior: "smooth" });
     }
 
     function sayYes() {
-      document.getElementById("fireworks").style.display = "block";
-      document.getElementById("fireworks").scrollIntoView({ behavior: "smooth" });
+      document.getElementById("final").style.display = "flex";
     }
 
     function moveNo() {
-      const noBtn = document.getElementById("no");
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
+      const btn = document.getElementById("no");
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 80);
+      btn.style.left = x + "px";
+      btn.style.top = y + "px";
     }
   </script>
 
