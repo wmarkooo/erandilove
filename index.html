@@ -62,16 +62,33 @@ canvas {
 /* ===== MAIN ===== */
 .main {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top, rgba(255,255,255,.25), transparent 60%),
-    linear-gradient(180deg, #f3cfd8, #f6efe9);
-  color: #5a3a44;
-  text-align: center;
-  padding: 140px 20px;
-  opacity: 0;
-  transition: opacity 2s ease;
   position: relative;
   z-index: 3;
+  padding: 160px 20px;
+  opacity: 0;
+  transition: opacity 2s ease;
+  text-align: center;
+
+  /* fondo rosa con profundidad + textura */
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,.25), transparent 55%),
+    linear-gradient(180deg, #f2c8d3, #f6efe9);
+}
+
+.main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,.02),
+      rgba(255,255,255,.02) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  pointer-events: none;
 }
 
 /* ===== BIENVENIDA ===== */
@@ -79,10 +96,10 @@ canvas {
   display: block;
   opacity: 0;
   font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  line-height: 2;
+  font-size: 1.9rem;          /* MÁS GRANDE */
+  line-height: 2.2;
   animation: fadeLine 1.6s forwards;
-  color: white;
+  color: #6a3a4a;             /* ROSA OSCURO / VINO */
 }
 
 .welcome span:nth-child(1){animation-delay:.6s}
@@ -96,11 +113,11 @@ canvas {
 
 /* ===== CARTA ===== */
 .letter {
-  max-width: 700px;
-  margin: 160px auto;
-  padding: 80px;
+  max-width: 720px;
+  margin: 180px auto;
+  padding: 90px;
   background: white;
-  border-radius: 26px;
+  border-radius: 28px;
   box-shadow: 0 60px 120px rgba(0,0,0,.35);
   display: none;
   animation: cartaEntrada 2s ease forwards;
@@ -111,13 +128,13 @@ canvas {
 .letter::before {
   content: "";
   position: absolute;
-  inset: 22px;
-  border: 1px solid #e6cfd7;
-  border-radius: 18px;
+  inset: 24px;
+  border: 1px solid #e4c9d2;
+  border-radius: 20px;
 }
 
 .letter:hover {
-  transform: translateY(-4px) rotateX(2deg);
+  transform: translateY(-6px) rotateX(2deg);
 }
 
 .letter h3 {
@@ -126,14 +143,16 @@ canvas {
 }
 
 .letter p {
-  line-height: 1.9;
+  line-height: 2;
   margin-bottom: 40px;
+  color: #5a3a44;
 }
 
 .question {
   font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   margin-bottom: 40px;
+  color: #5a3a44;
 }
 
 .buttons {
@@ -212,7 +231,6 @@ function startExperience(){
     document.getElementById("main").style.opacity=1;
   },1200);
 
-  // micro-pausa emocional
   setTimeout(()=>{
     document.getElementById("letter").style.display="block";
     setTimeout(()=>{
@@ -231,13 +249,13 @@ function moveNo(){
 
 function sayYes(){
   document.getElementById("main").innerHTML=`
-    <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Playfair Display',serif;color:white">
+    <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Playfair Display',serif;color:#5a3a44">
       <h2>Thank you for making my world softer.</h2>
       <p style="margin-top:20px;opacity:.7">I choose you.</p>
     </div>`;
 }
 
-/* ===== ESTRELLAS CON PROFUNDIDAD ===== */
+/* ===== ESTRELLAS (se quedan igual) ===== */
 const canvas=document.getElementById("stars");
 const ctx=canvas.getContext("2d");
 
@@ -248,33 +266,24 @@ function resize(){
 resize();
 addEventListener("resize",resize);
 
-const layers=[
-  { count:120, speed:.05 },
-  { count:80, speed:.15 },
-  { count:40, speed:.3 }
-];
-
 const stars=[];
-layers.forEach(layer=>{
-  for(let i=0;i<layer.count;i++){
-    stars.push({
-      x:Math.random()*canvas.width,
-      y:Math.random()*canvas.height,
-      r:Math.random()*1.5+0.5,
-      a:Math.random(),
-      s:layer.speed
-    });
-  }
-});
+for(let i=0;i<240;i++){
+  stars.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*1.5+.5,
+    a:Math.random(),
+    s:Math.random()*.3+.05
+  });
+}
 
 function animateStars(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   stars.forEach(star=>{
     star.a += (Math.random()-.5)*.03;
-    star.a = Math.max(.2, Math.min(1, star.a));
-    star.y += star.s;
+    star.a=Math.max(.2,Math.min(1,star.a));
+    star.y+=star.s;
     if(star.y>canvas.height) star.y=0;
-
     ctx.beginPath();
     ctx.arc(star.x,star.y,star.r,0,Math.PI*2);
     ctx.fillStyle=`rgba(255,255,255,${star.a})`;
