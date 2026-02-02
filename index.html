@@ -1,125 +1,174 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Para Erandi ❤️</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<title>Para Erandi ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  /* Reset básico */
+  * { margin:0; padding:0; box-sizing:border-box; }
 
-    body {
-      height: 100vh;
-      background: linear-gradient(135deg, #1c0b14, #3a0f2e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Poppins', sans-serif;
-      color: #fff;
-      overflow: hidden;
-    }
+  /* Fondo estrellado */
+  body {
+    height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(ellipse at bottom, #0b0a1f 0%, #150f2c 100%);
+    color: #fff;
+  }
 
-    .card {
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(10px);
-      padding: 50px 40px;
-      border-radius: 20px;
-      max-width: 500px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-      animation: fadeIn 1.5s ease;
-    }
+  /* Estrellas animadas */
+  .stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 0;
+  }
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 3s infinite alternate;
+  }
+  @keyframes twinkle {
+    from {opacity:0.3;}
+    to {opacity:1;}
+  }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.6em;
-      margin-bottom: 20px;
-    }
+  /* Luna */
+  .moon {
+    position: fixed;
+    top: 10%;
+    right: 10%;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, #fff, #ccc);
+    border-radius: 50%;
+    box-shadow: 0 0 30px 8px rgba(255,255,255,0.3);
+    z-index: 1;
+  }
 
-    p {
-      font-size: 1.05em;
-      line-height: 1.6;
-      opacity: 0.9;
-      margin-bottom: 30px;
-    }
+  /* Contenedor principal */
+  .container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+  }
 
-    .question {
-      font-size: 1.2em;
-      margin-bottom: 25px;
-      font-weight: 300;
-    }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.6);
+  }
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
+  p {
+    font-size: 1.2em;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-shadow: 0 0 6px rgba(0,0,0,0.5);
+  }
 
-    button {
-      padding: 12px 30px;
-      border: none;
-      border-radius: 30px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+  .question {
+    font-size: 1.3em;
+    margin-bottom: 25px;
+    font-weight: 300;
+  }
 
-    .yes {
-      background: #ff4d88;
-      color: white;
-    }
+  /* Botones elegantes */
+  .buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-    .yes:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 25px rgba(255,77,136,0.6);
-    }
+  button {
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
 
-    .no {
-      background: transparent;
-      color: white;
-      border: 1px solid rgba(255,255,255,0.4);
-      position: relative;
-    }
+  .yes {
+    background: linear-gradient(135deg, #ff4d88, #ff758c);
+    color: white;
+    box-shadow: 0 8px 20px rgba(255,77,136,0.5);
+  }
+  .yes:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 30px rgba(255,77,136,0.7);
+  }
 
-    .no:hover {
-      transform: translateY(-5px);
-      opacity: 0.7;
-    }
+  .no {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.6);
+    color: white;
+  }
+  .no:hover {
+    transform: translateY(-4px);
+    opacity: 0.8;
+  }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+  /* Animación de aparición */
+  .container {
+    animation: fadeIn 2s ease forwards;
+    opacity: 0;
+  }
+  @keyframes fadeIn {
+    to {opacity:1;}
+  }
+</style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>Para Erandi ❤️</h1>
-    <p>
-      Esto no es solo una página.  
-      Es una pequeña forma de decirte que desde que llegaste,
-      los días normales se volvieron especiales.
-    </p>
+<div class="stars">
+  <!-- Generar muchas estrellas -->
+  <script>
+    const starsContainer = document.querySelector('.stars');
+    for(let i=0; i<100; i++){
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random()*100+'%';
+      star.style.left = Math.random()*100+'%';
+      star.style.width = star.style.height = (Math.random()*2+1)+'px';
+      star.style.animationDuration = (Math.random()*3+2)+'s';
+      starsContainer.appendChild(star);
+    }
+  </script>
+</div>
 
-    <div class="question">
-      ¿Aceptas ser mi San Valentín?
-    </div>
+<div class="moon"></div>
 
-    <div class="buttons">
-      <button class="yes" onclick="alert('Sabía que dirías que sí ❤️')">Sí</button>
-      <button class="no">No</button>
-    </div>
+<div class="container">
+  <h1>Para Erandi ❤️</h1>
+  <p>
+    Esto no es solo una página.  
+    Es una pequeña forma de decirte que desde que llegaste,  
+    los días normales se volvieron especiales.
+  </p>
+  <div class="question">
+    ¿Aceptas ser mi San Valentín?
   </div>
+  <div class="buttons">
+    <button class="yes" onclick="alert('Sabía que dirías que sí ❤️')">Sí</button>
+    <button class="no">No</button>
+  </div>
+</div>
 
 </body>
 </html>
