@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>For Erandi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Erandi</title>
 
 <style>
-/* ---------- RESET ---------- */
 * {
   margin: 0;
   padding: 0;
@@ -14,50 +13,33 @@
   font-family: 'Georgia', serif;
 }
 
-/* ---------- FONDO NOCHE ---------- */
-body {
-  background: black;
-  color: white;
+html, body {
+  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
-/* ---------- SECCIONES ---------- */
-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-}
-
-/* ---------- ESTRELLAS ---------- */
-.stars, .stars2, .stars3 {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-repeat: repeat;
-  z-index: -1;
+/* ====== ESTRELLAS ====== */
+body {
+  background: black;
+  color: white;
 }
 
 .stars {
-  background-image: radial-gradient(1px 1px at 20px 30px, white, transparent),
-                    radial-gradient(1px 1px at 100px 150px, white, transparent),
-                    radial-gradient(1px 1px at 200px 80px, white, transparent);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(1px 1px at 10% 20%, white, transparent),
+    radial-gradient(1.5px 1.5px at 30% 80%, white, transparent),
+    radial-gradient(1px 1px at 50% 40%, white, transparent),
+    radial-gradient(2px 2px at 70% 60%, #ddd, transparent),
+    radial-gradient(1px 1px at 90% 10%, white, transparent),
+    radial-gradient(1.5px 1.5px at 20% 50%, #ccc, transparent);
+  background-size: 200px 200px;
   animation: moveStars 120s linear infinite;
-}
-
-.stars2 {
-  background-image: radial-gradient(1.5px 1.5px at 50px 60px, #ddd, transparent),
-                    radial-gradient(1.5px 1.5px at 160px 200px, #ddd, transparent);
-  animation: moveStars 180s linear infinite;
-}
-
-.stars3 {
-  background-image: radial-gradient(2px 2px at 90px 40px, #bbb, transparent);
-  animation: moveStars 240s linear infinite;
+  z-index: -1;
 }
 
 @keyframes moveStars {
@@ -65,8 +47,20 @@ section {
   to { transform: translateY(-2000px); }
 }
 
-/* ---------- BOTÓN INICIAR ---------- */
+/* ====== SECCIONES ====== */
+section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* ====== BOTÓN ====== */
 .start-btn {
+  margin-top: 30px;
   padding: 16px 50px;
   border-radius: 40px;
   border: 1px solid white;
@@ -79,30 +73,28 @@ section {
 
 @keyframes pulse {
   0% { transform: scale(1); box-shadow: 0 0 0 rgba(255,255,255,0); }
-  50% { transform: scale(1.08); box-shadow: 0 0 18px rgba(255,255,255,0.45); }
+  50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(255,255,255,.5); }
   100% { transform: scale(1); box-shadow: 0 0 0 rgba(255,255,255,0); }
 }
 
-/* ---------- TEXTO NOCHE ---------- */
+/* ====== TEXTO NOCHE ====== */
 .night-text {
-  font-size: 24px;
+  font-size: 26px;
+  max-width: 700px;
   opacity: 0;
   animation: fadeIn 2.5s forwards;
-  margin-bottom: 40px;
-  text-align: center;
 }
 
 @keyframes fadeIn {
   to { opacity: 1; }
 }
 
-/* ---------- SECCIÓN ROSA ---------- */
+/* ====== SECCIÓN ROSA ====== */
 .rose {
-  background: linear-gradient(135deg, #f3c5d7, #f7e6d5);
+  background: linear-gradient(135deg, #f4c6d8, #f6e3d3);
   background-size: 400% 400%;
-  animation: softGradient 15s ease infinite;
+  animation: softGradient 18s ease infinite;
   color: #5a2a3a;
-  padding: 60px 20px;
 }
 
 @keyframes softGradient {
@@ -111,52 +103,49 @@ section {
   100% { background-position: 0% 50%; }
 }
 
-/* ---------- TEXTO BIENVENIDA ---------- */
+/* ====== BIENVENIDA ====== */
 .welcome-text {
-  font-size: 38px;
-  text-align: center;
-  max-width: 800px;
+  font-size: 40px;
+  max-width: 900px;
   line-height: 1.4;
+  margin-bottom: 60px;
   opacity: 0;
-  animation: fadeInUp 2s forwards;
+  animation: slideUp 2s forwards;
 }
 
-@keyframes fadeInUp {
-  from { transform: translateY(20px); opacity: 0; }
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
-/* ---------- CARTA ---------- */
+/* ====== CARTA ====== */
 .letter {
   background: white;
   color: #333;
-  margin-top: 80px;
   padding: 50px;
   max-width: 600px;
-  border-radius: 12px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-  text-align: center;
+  border-radius: 14px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.25);
   opacity: 0;
-  transform: translateY(40px);
   animation: showLetter 2s forwards;
   animation-delay: 1s;
 }
 
 @keyframes showLetter {
-  to { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; }
 }
 
 .letter:hover {
   transform: rotateX(2deg) rotateY(-2deg);
 }
 
-/* ---------- BOTONES ---------- */
+/* ====== BOTONES ====== */
 .buttons {
   margin-top: 30px;
 }
 
-button.choice {
-  padding: 12px 30px;
+.choice {
+  padding: 12px 32px;
   margin: 10px;
   border-radius: 30px;
   border: none;
@@ -165,7 +154,7 @@ button.choice {
 }
 
 .yes {
-  background: #f3c5d7;
+  background: #f4c6d8;
 }
 
 .no {
@@ -173,13 +162,11 @@ button.choice {
   position: relative;
 }
 
-/* ---------- FINAL ---------- */
+/* ====== FINAL ====== */
 .final {
-  font-size: 30px;
   margin-top: 40px;
-  text-align: center;
+  font-size: 30px;
   opacity: 0;
-  animation: fadeIn 2s forwards;
 }
 </style>
 </head>
@@ -187,36 +174,32 @@ button.choice {
 <body>
 
 <div class="stars"></div>
-<div class="stars2"></div>
-<div class="stars3"></div>
 
-<!-- PANTALLA NOCHE -->
-<section id="night">
+<section id="inicio">
   <p class="night-text">Página web dedicada al amor de mi vida</p>
-  <button class="start-btn" onclick="start()">Iniciar</button>
+  <button class="start-btn" onclick="bajar()">Iniciar</button>
 </section>
 
-<!-- SECCIÓN ROSA -->
-<section class="rose" id="rose" style="display:none;">
+<section class="rose" id="rosa">
   <p class="welcome-text">
-    Welcome. <br><br>
-    This is not just a page. <br>
-    It’s a small attempt to show you <br>
-    how much you mean to me.
+    Bienvenida.<br><br>
+    Esto no es solo una página.<br>
+    Es un pequeño intento<br>
+    de mostrarte cuánto significas para mí.
   </p>
 
   <div class="letter">
     <p>
-      Since you came into my life,<br>
-      ordinary days feel special.<br><br>
-      I don’t need a date to love you,<br>
-      but I do want to spend this Valentine’s Day with you.<br><br>
-      Will you be my Valentine?
+      Desde que llegaste a mi vida,<br>
+      los días normales se sienten especiales.<br><br>
+      No necesito una fecha para quererte,<br>
+      pero sí quiero pasar este San Valentín contigo.<br><br>
+      ¿Aceptas ser mi San Valentín?
     </p>
 
     <div class="buttons">
-      <button class="choice yes" onclick="yes()">Yes</button>
-      <button class="choice no" onmouseover="moveNo(this)">No</button>
+      <button class="choice yes" onclick="acepta()">Sí</button>
+      <button class="choice no" onmouseover="moverNo(this)">No</button>
     </div>
   </div>
 
@@ -224,19 +207,19 @@ button.choice {
 </section>
 
 <script>
-function start() {
-  document.getElementById("night").style.display = "none";
-  document.getElementById("rose").style.display = "flex";
+function bajar() {
+  document.getElementById("rosa").scrollIntoView({ behavior: "smooth" });
 }
 
-function moveNo(btn) {
+function moverNo(btn) {
   btn.style.left = Math.random() * 120 - 60 + "px";
   btn.style.top = Math.random() * 60 - 30 + "px";
 }
 
-function yes() {
-  document.getElementById("final").innerHTML =
-    "Thank you for making my world softer.<br><em>I choose you.</em>";
+function acepta() {
+  const f = document.getElementById("final");
+  f.innerHTML = "Gracias por hacer mi mundo más bonito.<br><em>Te elijo.</em>";
+  f.style.opacity = 1;
 }
 </script>
 
