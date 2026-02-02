@@ -1,297 +1,243 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For You</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For Erandi</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+/* ---------- RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Georgia', serif;
+}
 
+/* ---------- FONDO NOCHE ---------- */
 body {
-  font-family: 'Poppins', sans-serif;
-  background: black;
-  overflow: hidden;
-}
-
-/* ===== CIELO ===== */
-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-}
-
-/* ===== INTRO ===== */
-.intro {
-  position: fixed;
-  inset: 0;
   background: black;
   color: white;
+  overflow-x: hidden;
+}
+
+/* ---------- SECCIONES ---------- */
+section {
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 5;
-  transition: transform 2s ease;
+  flex-direction: column;
+  position: relative;
 }
 
-.intro-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  letter-spacing: 2px;
-  opacity: .85;
-  margin-bottom: 40px;
-  text-align: center;
+/* ---------- ESTRELLAS ---------- */
+.stars, .stars2, .stars3 {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-repeat: repeat;
+  z-index: -1;
 }
 
+.stars {
+  background-image: radial-gradient(1px 1px at 20px 30px, white, transparent),
+                    radial-gradient(1px 1px at 100px 150px, white, transparent),
+                    radial-gradient(1px 1px at 200px 80px, white, transparent);
+  animation: moveStars 120s linear infinite;
+}
+
+.stars2 {
+  background-image: radial-gradient(1.5px 1.5px at 50px 60px, #ddd, transparent),
+                    radial-gradient(1.5px 1.5px at 160px 200px, #ddd, transparent);
+  animation: moveStars 180s linear infinite;
+}
+
+.stars3 {
+  background-image: radial-gradient(2px 2px at 90px 40px, #bbb, transparent);
+  animation: moveStars 240s linear infinite;
+}
+
+@keyframes moveStars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-2000px); }
+}
+
+/* ---------- BOTÓN INICIAR ---------- */
 .start-btn {
-  padding: 14px 46px;
+  padding: 16px 50px;
   border-radius: 40px;
   border: 1px solid white;
   background: transparent;
   color: white;
+  font-size: 18px;
   cursor: pointer;
+  animation: pulse 2.6s ease-in-out infinite;
 }
 
-.start-btn:hover {
-  background: white;
-  color: black;
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(255,255,255,0); }
+  50% { transform: scale(1.08); box-shadow: 0 0 18px rgba(255,255,255,0.45); }
+  100% { transform: scale(1); box-shadow: 0 0 0 rgba(255,255,255,0); }
 }
 
-/* ===== MAIN ===== */
-.main {
-  min-height: 100vh;
-  position: relative;
-  z-index: 3;
-  padding: 160px 20px;
+/* ---------- TEXTO NOCHE ---------- */
+.night-text {
+  font-size: 24px;
   opacity: 0;
-  transition: opacity 2s ease;
+  animation: fadeIn 2.5s forwards;
+  margin-bottom: 40px;
   text-align: center;
-
-  /* fondo rosa con profundidad + textura */
-  background:
-    radial-gradient(circle at 20% 10%, rgba(255,255,255,.35), transparent 60%),
-    radial-gradient(circle at 80% 30%, rgba(255,255,255,.25), transparent 55%),
-    linear-gradient(180deg, #f2c8d3, #f6efe9);
 }
 
-.main::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,.02),
-      rgba(255,255,255,.02) 1px,
-      transparent 1px,
-      transparent 4px
-    );
-  pointer-events: none;
-}
-
-/* ===== BIENVENIDA ===== */
-.welcome span {
-  display: block;
-  opacity: 0;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.9rem;          /* MÁS GRANDE */
-  line-height: 2.2;
-  animation: fadeLine 1.6s forwards;
-  color: #6a3a4a;             /* ROSA OSCURO / VINO */
-}
-
-.welcome span:nth-child(1){animation-delay:.6s}
-.welcome span:nth-child(2){animation-delay:2s}
-.welcome span:nth-child(3){animation-delay:3.4s}
-.welcome span:nth-child(4){animation-delay:4.8s}
-
-@keyframes fadeLine {
+@keyframes fadeIn {
   to { opacity: 1; }
 }
 
-/* ===== CARTA ===== */
-.letter {
-  max-width: 720px;
-  margin: 180px auto;
-  padding: 90px;
-  background: white;
-  border-radius: 28px;
-  box-shadow: 0 60px 120px rgba(0,0,0,.35);
-  display: none;
-  animation: cartaEntrada 2s ease forwards;
-  transition: transform .4s ease, box-shadow 1.5s ease;
-  position: relative;
+/* ---------- SECCIÓN ROSA ---------- */
+.rose {
+  background: linear-gradient(135deg, #f3c5d7, #f7e6d5);
+  background-size: 400% 400%;
+  animation: softGradient 15s ease infinite;
+  color: #5a2a3a;
+  padding: 60px 20px;
 }
 
-.letter::before {
-  content: "";
-  position: absolute;
-  inset: 24px;
-  border: 1px solid #e4c9d2;
-  border-radius: 20px;
+@keyframes softGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------- TEXTO BIENVENIDA ---------- */
+.welcome-text {
+  font-size: 38px;
+  text-align: center;
+  max-width: 800px;
+  line-height: 1.4;
+  opacity: 0;
+  animation: fadeInUp 2s forwards;
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ---------- CARTA ---------- */
+.letter {
+  background: white;
+  color: #333;
+  margin-top: 80px;
+  padding: 50px;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: showLetter 2s forwards;
+  animation-delay: 1s;
+}
+
+@keyframes showLetter {
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .letter:hover {
-  transform: translateY(-6px) rotateX(2deg);
+  transform: rotateX(2deg) rotateY(-2deg);
 }
 
-.letter h3 {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 30px;
-}
-
-.letter p {
-  line-height: 2;
-  margin-bottom: 40px;
-  color: #5a3a44;
-}
-
-.question {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.9rem;
-  margin-bottom: 40px;
-  color: #5a3a44;
-}
-
+/* ---------- BOTONES ---------- */
 .buttons {
-  position: relative;
-  height: 80px;
+  margin-top: 30px;
 }
 
-button {
-  padding: 14px 38px;
-  border-radius: 40px;
+button.choice {
+  padding: 12px 30px;
+  margin: 10px;
+  border-radius: 30px;
   border: none;
+  font-size: 16px;
   cursor: pointer;
 }
 
-#yes {
-  background: #d65c8b;
-  color: white;
+.yes {
+  background: #f3c5d7;
 }
 
-#no {
-  background: #e4e4e4;
-  color: #555;
-  position: absolute;
+.no {
+  background: #eee;
+  position: relative;
 }
 
-@keyframes cartaEntrada {
-  from { opacity:0; transform:translateY(90px); }
-  to { opacity:1; transform:translateY(0); }
+/* ---------- FINAL ---------- */
+.final {
+  font-size: 30px;
+  margin-top: 40px;
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="stars"></canvas>
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
 
-<section class="intro" id="intro">
-  <div class="intro-text">Página web dedicada al amor de mi vida</div>
-  <button class="start-btn" onclick="startExperience()">Iniciar</button>
+<!-- PANTALLA NOCHE -->
+<section id="night">
+  <p class="night-text">Página web dedicada al amor de mi vida</p>
+  <button class="start-btn" onclick="start()">Iniciar</button>
 </section>
 
-<section class="main" id="main">
-  <div class="welcome">
-    <span>Bienvenida.</span>
-    <span>Esto no es solo una página.</span>
-    <span>Es un pequeño intento de mostrarte</span>
-    <span>lo mucho que significas para mí.</span>
-  </div>
+<!-- SECCIÓN ROSA -->
+<section class="rose" id="rose" style="display:none;">
+  <p class="welcome-text">
+    Welcome. <br><br>
+    This is not just a page. <br>
+    It’s a small attempt to show you <br>
+    how much you mean to me.
+  </p>
 
-  <div class="letter" id="letter">
-    <h3>For you</h3>
+  <div class="letter">
     <p>
-      Desde que llegaste a mi vida,<br>
-      los días normales se sienten especiales.<br>
-      No necesito una fecha para quererte,<br>
-      pero sí quiero pasar este San Valentín contigo.
+      Since you came into my life,<br>
+      ordinary days feel special.<br><br>
+      I don’t need a date to love you,<br>
+      but I do want to spend this Valentine’s Day with you.<br><br>
+      Will you be my Valentine?
     </p>
 
-    <div class="question">Will you be my Valentine?</div>
-
     <div class="buttons">
-      <button id="yes" onclick="sayYes()">Yes</button>
-      <button id="no" onmouseover="moveNo()">No</button>
+      <button class="choice yes" onclick="yes()">Yes</button>
+      <button class="choice no" onmouseover="moveNo(this)">No</button>
     </div>
-
-    <p style="margin-top:50px; opacity:.6">— With all my love</p>
   </div>
+
+  <div class="final" id="final"></div>
 </section>
 
 <script>
-/* ===== EXPERIENCIA ===== */
-function startExperience(){
-  document.getElementById("intro").style.transform="translateY(-100%)";
-  setTimeout(()=>{
-    document.body.style.overflow="auto";
-    document.getElementById("main").style.opacity=1;
-  },1200);
-
-  setTimeout(()=>{
-    document.getElementById("letter").style.display="block";
-    setTimeout(()=>{
-      document.getElementById("letter").style.boxShadow =
-        "0 30px 70px rgba(0,0,0,.25)";
-    },1200);
-  },6500);
+function start() {
+  document.getElementById("night").style.display = "none";
+  document.getElementById("rose").style.display = "flex";
 }
 
-/* ===== BOTONES ===== */
-function moveNo(){
-  const b=document.getElementById("no");
-  b.style.left=Math.random()*280+"px";
-  b.style.top=Math.random()*40+"px";
+function moveNo(btn) {
+  btn.style.left = Math.random() * 120 - 60 + "px";
+  btn.style.top = Math.random() * 60 - 30 + "px";
 }
 
-function sayYes(){
-  document.getElementById("main").innerHTML=`
-    <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Playfair Display',serif;color:#5a3a44">
-      <h2>Thank you for making my world softer.</h2>
-      <p style="margin-top:20px;opacity:.7">I choose you.</p>
-    </div>`;
+function yes() {
+  document.getElementById("final").innerHTML =
+    "Thank you for making my world softer.<br><em>I choose you.</em>";
 }
-
-/* ===== ESTRELLAS (se quedan igual) ===== */
-const canvas=document.getElementById("stars");
-const ctx=canvas.getContext("2d");
-
-function resize(){
-  canvas.width=innerWidth;
-  canvas.height=innerHeight;
-}
-resize();
-addEventListener("resize",resize);
-
-const stars=[];
-for(let i=0;i<240;i++){
-  stars.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*1.5+.5,
-    a:Math.random(),
-    s:Math.random()*.3+.05
-  });
-}
-
-function animateStars(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  stars.forEach(star=>{
-    star.a += (Math.random()-.5)*.03;
-    star.a=Math.max(.2,Math.min(1,star.a));
-    star.y+=star.s;
-    if(star.y>canvas.height) star.y=0;
-    ctx.beginPath();
-    ctx.arc(star.x,star.y,star.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(255,255,255,${star.a})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(animateStars);
-}
-animateStars();
 </script>
 
 </body>
