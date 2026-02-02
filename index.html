@@ -12,7 +12,20 @@
   box-sizing: border-box;
   font-family: 'Georgia', serif;
 }
-
+.moon {
+  position: fixed;
+  top: 60px;
+  right: 80px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #e6e6e6 60%, #d0d0d0);
+  box-shadow:
+    0 0 30px rgba(255,255,255,0.35),
+    0 0 80px rgba(255,255,255,0.15);
+  z-index: -1;
+  opacity: 0.9;
+}
 html, body {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -174,7 +187,8 @@ section {
 <body>
 
 <div class="stars"></div>
-
+<div class="moon"></div>
+  
 <section id="inicio">
   <p class="night-text">Página web dedicada al amor de mi vida</p>
   <button class="start-btn" onclick="bajar()">Iniciar</button>
