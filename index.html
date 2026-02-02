@@ -14,17 +14,42 @@
 }
 .moon {
   position: fixed;
-  top: 60px;
-  right: 80px;
+  top: 50px;
+  right: 70px;
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffffff, #e6e6e6 60%, #d0d0d0);
+
+  background:
+    radial-gradient(circle at 30% 30%, #ffffff, #eaeaea 55%, #cfcfcf 75%),
+    radial-gradient(circle at 70% 65%, rgba(0,0,0,0.08), transparent 40%);
+
   box-shadow:
-    0 0 30px rgba(255,255,255,0.35),
-    0 0 80px rgba(255,255,255,0.15);
-  z-index: -1;
-  opacity: 0.9;
+    0 0 60px rgba(255,255,255,0.45),
+    0 0 140px rgba(255,255,255,0.25),
+    0 0 260px rgba(255,255,255,0.15);
+
+  opacity: 0.95;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(0.2px);
+
+  animation: moonGlow 6s ease-in-out infinite;
+}
+
+@keyframes moonGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 60px rgba(255,255,255,0.45),
+      0 0 140px rgba(255,255,255,0.25),
+      0 0 260px rgba(255,255,255,0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 90px rgba(255,255,255,0.6),
+      0 0 180px rgba(255,255,255,0.35),
+      0 0 300px rgba(255,255,255,0.2);
+  }
 }
 html, body {
   scroll-behavior: smooth;
