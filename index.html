@@ -2,173 +2,251 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Erandi ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para el amor de mi vida</title>
+
 <style>
-  /* Reset básico */
-  * { margin:0; padding:0; box-sizing:border-box; }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Georgia', serif;
+}
 
-  /* Fondo estrellado */
-  body {
-    height: 100vh;
-    overflow-x: hidden;
-    font-family: 'Poppins', sans-serif;
-    background: radial-gradient(ellipse at bottom, #0b0a1f 0%, #150f2c 100%);
-    color: #fff;
-  }
+html, body{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+}
 
-  /* Estrellas animadas */
-  .stars {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    z-index: 0;
-  }
-  .star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.8;
-    animation: twinkle 3s infinite alternate;
-  }
-  @keyframes twinkle {
-    from {opacity:0.3;}
-    to {opacity:1;}
-  }
+/* ===== FONDO NEGRO ===== */
+body{
+  background:black;
+  color:white;
+}
 
-  /* Luna */
-  .moon {
-    position: fixed;
-    top: 10%;
-    right: 10%;
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(circle at 30% 30%, #fff, #ccc);
-    border-radius: 50%;
-    box-shadow: 0 0 30px 8px rgba(255,255,255,0.3);
-    z-index: 1;
-  }
+/* ===== ESTRELLAS ===== */
+.stars{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  background:
+    radial-gradient(2px 2px at 10% 20%, white, transparent),
+    radial-gradient(2px 2px at 30% 80%, white, transparent),
+    radial-gradient(1.5px 1.5px at 50% 40%, white, transparent),
+    radial-gradient(2px 2px at 70% 60%, #ddd, transparent),
+    radial-gradient(1.5px 1.5px at 90% 10%, white, transparent),
+    radial-gradient(2px 2px at 20% 50%, #ccc, transparent),
+    radial-gradient(1.5px 1.5px at 80% 30%, white, transparent);
+  background-size:300px 300px;
+  animation:moverEstrellas 150s linear infinite;
+  z-index:-2;
+}
 
-  /* Contenedor principal */
-  .container {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    text-align: center;
-    padding: 20px;
-  }
+@keyframes moverEstrellas{
+  from{ transform:translateY(0);}
+  to{ transform:translateY(-2000px);}
+}
 
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3em;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(255,255,255,0.6);
-  }
+/* ===== LUNA ===== */
+.moon{
+  position:fixed;
+  top:50px;
+  right:70px;
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ffffff,
+    #eaeaea 55%,
+    #d6d6d6 70%
+  );
+  box-shadow:
+    0 0 60px rgba(255,255,255,0.45),
+    0 0 140px rgba(255,255,255,0.25),
+    0 0 260px rgba(255,255,255,0.15);
+  z-index:-1;
+  opacity:0.95;
+}
 
-  p {
-    font-size: 1.2em;
-    max-width: 600px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    text-shadow: 0 0 6px rgba(0,0,0,0.5);
-  }
+/* ===== SECCIONES ===== */
+section{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  padding:40px 20px;
+}
 
-  .question {
-    font-size: 1.3em;
-    margin-bottom: 25px;
-    font-weight: 300;
-  }
+/* ===== BOTÓN INICIAR ===== */
+.start-btn{
+  margin-top:30px;
+  padding:16px 50px;
+  border-radius:40px;
+  border:1px solid white;
+  background:transparent;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  animation:pulse 2.6s ease-in-out infinite;
+}
 
-  /* Botones elegantes */
-  .buttons {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+@keyframes pulse{
+  0%{ transform:scale(1); box-shadow:0 0 0 rgba(255,255,255,0);}
+  50%{ transform:scale(1.08); box-shadow:0 0 25px rgba(255,255,255,.6);}
+  100%{ transform:scale(1); box-shadow:0 0 0 rgba(255,255,255,0);}
+}
 
-  button {
-    padding: 12px 30px;
-    border-radius: 30px;
-    font-size: 1em;
-    cursor: pointer;
-    border: none;
-    transition: all 0.3s ease;
-    font-weight: 500;
-  }
+/* ===== TEXTO NOCHE ===== */
+.night-text{
+  font-size:28px;
+  max-width:700px;
+  opacity:0;
+  animation:fadeIn 2.5s forwards;
+}
 
-  .yes {
-    background: linear-gradient(135deg, #ff4d88, #ff758c);
-    color: white;
-    box-shadow: 0 8px 20px rgba(255,77,136,0.5);
-  }
-  .yes:hover {
-    transform: scale(1.1);
-    box-shadow: 0 12px 30px rgba(255,77,136,0.7);
-  }
+@keyframes fadeIn{
+  to{opacity:1;}
+}
 
-  .no {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.6);
-    color: white;
-  }
-  .no:hover {
-    transform: translateY(-4px);
-    opacity: 0.8;
-  }
+/* ===== SECCIÓN ROSA ===== */
+.rosa{
+  background:linear-gradient(135deg,#f4c6d8,#f6e3d3);
+  background-size:400% 400%;
+  animation:gradienteSuave 18s ease infinite;
+  color:#5a2a3a;
+}
 
-  /* Animación de aparición */
-  .container {
-    animation: fadeIn 2s ease forwards;
-    opacity: 0;
-  }
-  @keyframes fadeIn {
-    to {opacity:1;}
-  }
+@keyframes gradienteSuave{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* ===== TEXTO BIENVENIDA ===== */
+.welcome-text{
+  font-size:42px;
+  max-width:900px;
+  line-height:1.4;
+  margin-bottom:60px;
+  opacity:0;
+  animation:subir 2s forwards;
+}
+
+@keyframes subir{
+  from{ transform:translateY(30px); opacity:0;}
+  to{ transform:translateY(0); opacity:1;}
+}
+
+/* ===== CARTA ===== */
+.letter{
+  background:white;
+  color:#333;
+  padding:50px;
+  max-width:600px;
+  border-radius:14px;
+  box-shadow:0 30px 60px rgba(0,0,0,.25);
+  opacity:0;
+  animation:mostrarCarta 2s forwards;
+  animation-delay:1s;
+}
+
+@keyframes mostrarCarta{
+  to{opacity:1;}
+}
+
+.letter:hover{
+  transform:rotateX(2deg) rotateY(-2deg);
+}
+
+/* ===== BOTONES ===== */
+.buttons{
+  margin-top:30px;
+}
+
+.choice{
+  padding:12px 32px;
+  margin:10px;
+  border-radius:30px;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.yes{
+  background:#f4c6d8;
+}
+
+.no{
+  background:#eee;
+  position:relative;
+}
+
+/* ===== FINAL ===== */
+.final{
+  margin-top:40px;
+  font-size:30px;
+  opacity:0;
+}
 </style>
 </head>
+
 <body>
 
-<div class="stars">
-  <!-- Generar muchas estrellas -->
-  <script>
-    const starsContainer = document.querySelector('.stars');
-    for(let i=0; i<100; i++){
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.top = Math.random()*100+'%';
-      star.style.left = Math.random()*100+'%';
-      star.style.width = star.style.height = (Math.random()*2+1)+'px';
-      star.style.animationDuration = (Math.random()*3+2)+'s';
-      starsContainer.appendChild(star);
-    }
-  </script>
-</div>
-
+<div class="stars"></div>
 <div class="moon"></div>
 
-<div class="container">
-  <h1>Para Erandi ❤️</h1>
-  <p>
-    Esto no es solo una página.  
-    Es una pequeña forma de decirte que desde que llegaste,  
-    los días normales se volvieron especiales.
+<section id="inicio">
+  <p class="night-text">Página web dedicada al amor de mi vida</p>
+  <button class="start-btn" onclick="bajar()">Iniciar</button>
+</section>
+
+<section class="rosa" id="rosa">
+  <p class="welcome-text">
+    Bienvenida.<br><br>
+    Esto no es solo una página.<br>
+    Es un pequeño intento<br>
+    de mostrarte cuánto significas para mí.
   </p>
-  <div class="question">
-    ¿Aceptas ser mi San Valentín?
+
+  <div class="letter">
+    <p>
+      Desde que llegaste a mi vida,<br>
+      los días normales se sienten especiales.<br><br>
+      No necesito una fecha para quererte,<br>
+      pero sí quiero pasar este momento contigo.<br><br>
+      ¿Aceptas ser mi San Valentín?
+    </p>
+
+    <div class="buttons">
+      <button class="choice yes" onclick="acepta()">Sí</button>
+      <button class="choice no" onmouseover="moverNo(this)">No</button>
+    </div>
   </div>
-  <div class="buttons">
-    <button class="yes" onclick="alert('Sabía que dirías que sí ❤️')">Sí</button>
-    <button class="no">No</button>
-  </div>
-</div>
+
+  <div class="final" id="final"></div>
+</section>
+
+<script>
+function bajar(){
+  document.getElementById("rosa").scrollIntoView({behavior:"smooth"});
+}
+
+function moverNo(btn){
+  btn.style.left = Math.random()*120-60 + "px";
+  btn.style.top = Math.random()*60-30 + "px";
+}
+
+function acepta(){
+  const f=document.getElementById("final");
+  f.innerHTML="Gracias por hacer mi mundo más bonito.<br><em>Te elijo.</em>";
+  f.style.opacity=1;
+}
+</script>
 
 </body>
 </html>
